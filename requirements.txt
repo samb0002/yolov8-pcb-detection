@@ -1,0 +1,11 @@
+ultralytics
+torch
+torchvision
+numpy
+pyyaml
+roboflow
+opencv-python
+matplotlib
+onnx
+onnxruntime
+seaborn
