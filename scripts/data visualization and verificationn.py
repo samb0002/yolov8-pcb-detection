@@ -82,27 +82,49 @@ print("Class names:", class_names)
 
 import os
 from collections import Counter
+import yaml
+import matplotlib.pyplot as plt
+
+yaml_path = "/content/PCB-Defects--1/data.yaml"
+
+with open(yaml_path, "r") as f:
+    data = yaml.safe_load(f)
+
+class_names = data["names"]
+print("Class names:", class_names)
+
+# Loop through all label files to count how many images contain each class
 
 label_dir = "/content/PCB-Defects--1/train/labels"
-class_counts = Counter()
+image_class_counts = Counter()
 
+print("\nCounting images containing each class in the training set...")
 for file in os.listdir(label_dir):
     if file.endswith(".txt"):
         with open(os.path.join(label_dir, file), "r") as f:
             lines = f.read().strip().splitlines()
+
+            
+            unique_cls_ids_in_image = set()
             for line in lines:
                 cls_id = int(line.split()[0])
+                unique_cls_ids_in_image.add(cls_id)
+            
+            # Increment count for each class found in this image
+            for cls_id in unique_cls_ids_in_image:
                 class_name = class_names[cls_id]
-                class_counts[class_name] += 1
+                image_class_counts[class_name] += 1
 
-print("\nClass counts using REAL names:\n")
-for name, count in sorted(class_counts.items()):
-    print(f"{name}: {count} samples")
-#Plottingthe bar graph to visualized the Number of samples / Class
+print("\nNumber of images containing each class (training set):\n")
+for name, count in sorted(image_class_counts.items()):
+    print(f"{name}: {count} images")
+
+# Plotting the bar graph to visualize the Number of images / Class
 plt.figure(figsize=(10, 5))
-plt.bar(class_counts.keys(), class_counts.values(), color="teal")
+plt.bar(image_class_counts.keys(), image_class_counts.values(), color="teal")
 plt.xlabel("Class Name")
-plt.ylabel("Number of Annotations")
-plt.title("Class Distribution in Dataset")
+plt.ylabel("Number of Images")
+plt.title("Class Distribution by Image in Training Dataset")
 plt.xticks(rotation=45)
+plt.tight_layout()
 plt.show()
