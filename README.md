@@ -72,3 +72,10 @@ The system follows a standard ML pipeline optimized for **Edge/Embedded deployme
 ### Current Limitations
 - **No Post Quantization Accuracy Check**: Accuracy of INT8 model vs FP32 not formally validated since the ONNX quantized version requires post processign Non Mximum Suppression which is responsible for box and   
 - **Non Valid Benchmarking**: Performance results depend on host CPU ; and hardware ressources.The Full Precision model with 42MB size is ver drectly deployable on hardware wit 4gb ram, but CPU usage may lower the inference time, GPU is highly recommended fgor Image detection and processing.
+---
+## Requirements
+
+Install all dependencies with:
+
+```bash
+pip install -r requirements.txt
