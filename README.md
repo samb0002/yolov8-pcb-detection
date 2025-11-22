@@ -41,7 +41,7 @@ The system follows a standard ML pipeline optimized for **Edge/Embedded deployme
 | Model     | Precision | Avg Latency (ms) | Acceleration |
 |-----------|-----------|------------------|--------------|
 |  best.pt /.onnx   | FP32      | 2.9ms | /|
-| best_int8_dynamic.onnx) | INT8      | /| /|
+| best_qd_int8.onnx) | INT8      | Requires post proceesing| requires post processing|
 
 ---
 
