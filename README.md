@@ -70,9 +70,12 @@ The system follows a standard ML pipeline optimized for **Edge/Embedded deployme
 - **Quantization Method**:  Static quantization. The ONNX quantized model required post processing phase as it does not include the NMS inside the architecture as YOLOv8 or the best.pt automaticallly does. Dynamic quantization may be less problem causing and error but requires much more time, documentation, coding and calibration data.
 
 ### Current Limitations
-- **No Post Quantization Accuracy Check**: Accuracy of INT8 model vs FP32 not formally validated since the ONNX quantized version requires post processign Non Mximum Suppression which is responsible for box and   
-- **Non Valid Benchmarking**: Performance results depend on host CPU ; and hardware ressources.The Full Precision model with 42MB size is ver drectly deployable on hardware wit 4gb ram, but CPU usage may lower the inference time, GPU is highly recommended fgor Image detection and processing.
----
+- **No Post Quantization Accuracy Check**: Accuracy of INT8 model vs FP32 not formally validated since the ONNX quantized version requires post processing Non Mximum Suppression (NMS).   
+- **Non Valid Benchmarking**: Performance results depend on host CPU ; and hardware ressources.The Full Precision model with 42MB size is very much deployable on hardware with a 4gb ram, but CPU usage may lower the inference time, GPU is highly recommended for Image detection and processing.
+
+### Further Work
+- As a further work, apply post processing ot the quantized yolov8 model in order to showcase a clear difference in terms of accuracy, inference time and real time testings on real PCBs.
+  
 ## Requirements
 
 Install all dependencies with:
